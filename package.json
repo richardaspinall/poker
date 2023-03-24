@@ -1,0 +1,31 @@
+{
+  "name": "poker-poker",
+  "version": "1.0.0",
+  "description": "## Debugging",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "cd backend && npm run start:dev",
+    "install:all": "npm install && cd ./backend && npm install",
+    "test": "cd backend && npm run test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run prettier-format && npm run lint"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardaspinall/poker-poker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richardaspinall/poker-poker/issues"
+  },
+  "homepage": "https://github.com/richardaspinall/poker-poker#readme",
+  "devDependencies": {
+    "@types/jest": "^29.2.2",
+    "@types/socket.io": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.41.0"
+  }
+}
