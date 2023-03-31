@@ -13,6 +13,12 @@
 
 ---
 
+## Requirements:
+
+* Nodejs 14
+
+---
+
 ## Start dev (not implemented / will see errors for now!):
 
 `npm run start:dev`
