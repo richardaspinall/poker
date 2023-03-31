@@ -4,7 +4,7 @@ We have come up with a list of learning objectives for this project, but it's a 
 
 ---
 
-## MVP / First phase
+## Phase One - Make it work
 
 | Project Learning Objective    | Description                                                                       |
 | ----------------------------- | --------------------------------------------------------------------------------- |
