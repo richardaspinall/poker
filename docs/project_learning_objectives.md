@@ -15,11 +15,8 @@ We have come up with a list of learning objectives for this project, but it's a 
 | Test Driven Development (TDD) | How to do test driven development                                                 |
 | Feature Requirement           | How to create, scope and discover requirements for features                       |
 | Backend                       | How to code for the backend                                                       |
-| Object Oriented Learning      | How to write in an Object Oriented Programming way                                |
-| Design & Architecture         | How to design and architect a system                                              |
 | TypeScript                    | How to write in Typescript which is strongly typed JavaScript                     |
 | Unit Testing                  | How to create unit tests which is testing the smallest testable parts of a system |
-| Scalability                   | How to scale and create code that scales                                          |
 | Debugging                     | How to debug a system                                                             |
 |                               |                                                                                   |
 
@@ -29,5 +26,8 @@ We have come up with a list of learning objectives for this project, but it's a 
 
 | Project Learning Objective | Description                                                      |
 | -------------------------- | ---------------------------------------------------------------- |
+| Scalability                | How to scale and create code that scales                         |
+| Object Oriented Learning   | How to write in an Object Oriented Programming way               |
+| Design & Architecture      | How to design and architect a system                             |
 | Docker                     | How to create docker images and run a consistent dev environment |
 |                            |                                                                  |
