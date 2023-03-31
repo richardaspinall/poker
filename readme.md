@@ -15,7 +15,7 @@
 
 ## Requirements:
 
-`Nodejs 14`
+* Nodejs 14
 
 ---
 
