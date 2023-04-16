@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Poker Poker</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/index.js" type="module"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <form action="/login" method="POST">
+        <div>
+            <label for="username">Username</label>
+            <input name="username" id="username" value="">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input name="password" id="password" value="">
+        </div>
+        <div>
+            <button>Log in</button>
+        </div>
+    </form>
+
+    <div id="table">
+        <div id="pot" data-chip-count="0">
+            Pot
+        </div>
+
+        <div id="board-area">
+            <div id="flop-area">
+            </div>
+            <div class="vl"></div>
+            <div id="turn-area">
+            </div>
+            <div class="vl"></div>
+            <div id="river-area">
+            </div>
+        </div>
+
+
+        <div class="seat" id="seat-1" data-chip-count="0">
+            Empty
+            <div id="dealer-indicator">
+                B
+            </div>
+        </div>
+        <div class="seat" id="seat-2" data-chip-count="0">
+            Empty
+        </div>
+    </div>
+    <div id="player-actions">
+        <div class="slidecontainer">
+            <input type="range" min="0" max="10000" value="1000" class="slider" id="myRange">
+            <input id="bet-input" value="1000"></input>
+        </div>
+        <button class="action-buttons" id="fold-action-button">Fold</button>
+        <button class="action-buttons" id="check-action-button">Check</button>
+        <button class="action-buttons" id="call-action-button">Call</button>
+        <button class="action-buttons" id="raise-action-button">Bet</button>
+        <button class="action-buttons" id="leave-table-button">Leave</button>
+    </div>
+
+
+
+</body>
+
+</html>
