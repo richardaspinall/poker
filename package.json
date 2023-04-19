@@ -1,5 +1,5 @@
 {
-  "name": "poker-poker",
+  "name": "poker",
   "version": "1.0.0",
   "description": "## Debugging",
   "main": "index.js",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/richardaspinall/poker-poker.git"
+    "url": "git+https://github.com/richardaspinall/poker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/richardaspinall/poker-poker/issues"
+    "url": "https://github.com/richardaspinall/poker/issues"
   },
-  "homepage": "https://github.com/richardaspinall/poker-poker#readme",
+  "homepage": "https://github.com/richardaspinall/poker#readme",
   "devDependencies": {
     "@types/jest": "^29.2.2",
     "@types/socket.io": "^3.0.2",
