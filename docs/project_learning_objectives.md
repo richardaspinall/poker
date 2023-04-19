@@ -7,17 +7,16 @@ We have come up with a list of learning objectives for this project, but it's a 
 ## Phase One - Make it work
 
 | Project Learning Objective    | Description                                                                       |
-| ----------------------------- | --------------------------------------------------------------------------------- |
+| ----------------------------- | --------------------------------------------------------------------------------- | --- |
 | Git and Github                | How to use Git and Github and some best practices                                 |
 | Code Review                   | How to review code of peers as quality assurance, learn and help each other learn |
 | Collaboration                 | How to work together on a piece of work or task including pair programming        |
-| Team work                     | How to divide and conquer tasks combining individual efforts to achieve goals     |
+| Teamwork                      | How to divide and conquer tasks combining individual efforts to achieve goals     |
 | Test Driven Development (TDD) | How to do test driven development                                                 |
-| Feature Requirement           | How to create, scope and discover requirements for features                       |
-| Backend                       | How to code for the backend                                                       |
-| TypeScript                    | How to write in Typescript which is strongly typed JavaScript                     |
+| Feature Requirement           | How to create, scope and discover requirements for features                       |     |
+| TypeScript                    | How to write in Typescript                                                        |
 | Unit Testing                  | How to create unit tests which is testing the smallest testable parts of a system |
-| Debugging                     | How to debug a system                                                             |
+| Debugging                     | How to debug a system for errors or bugs                                          |
 |                               |                                                                                   |
 
 ---
