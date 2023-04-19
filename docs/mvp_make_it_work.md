@@ -5,7 +5,7 @@ This phase of the project is the MVP – Minimum Viable Product and it's all abo
 ## MVP
 
 2 player (heads up) Texas Holdem
-Minimal frontend where 2 players can click to sit at seats at a table, click a button to say they are ready, and have buttons to fold, check, call, bet. Cards, table and who's turn it is should be clear
+Minimal frontend where 2 players can click to sit at seats at a table, click a button to say they are ready, and have buttons to fold, check, call, bet (with basic bet logic). Cards, table and whose turn it is should be clear.
 Game logic to iterate through each players turn and then street (preflop, flop, turn, river) showing each community card
 External API call for determining the winning hand
 
