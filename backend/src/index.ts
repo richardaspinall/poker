@@ -4,6 +4,8 @@ import session, { Session } from 'express-session';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
+import { ServerToClientEvents, ClientToServerEvents } from './shared/WebSocketEvents';
+
 declare module 'http' {
   interface IncomingMessage {
     session: Session & {
@@ -33,9 +35,8 @@ app.post('/login', (req, res) => {
   res.redirect('/');
 });
 
-// Create the socket server
-
-const io = new Server(httpServer, {
+// Create the socket server with the event types for typing
+const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   /* options */
 });
 
@@ -46,8 +47,51 @@ io.use((socket, next) => {
 
 // New client connected
 io.on('connection', (socket) => {
-  // ...
-  console.log('connected');
+  // Send a hello to the client after receiving a hello from it
+  socket.on('hello_from_client', () => {
+    console.log('hello from client');
+    socket.emit('hello_from_server');
+  });
+
+  //
+  // Incoming events
+  //
+  socket.on('player_viewing', () => {
+    console.log(`player ${socket.id} is viewing table`);
+
+    // Join the table to start receiving events
+    socket.join('table-1');
+  });
+
+  socket.on('player_sits', (seatNumber) => {
+    console.log(`player sits at ${seatNumber}`);
+
+    // Let the table know that someone has seated
+    io.to('table-1').emit('player_sits', seatNumber);
+  });
+
+  socket.on('player_stands', (seatNumber) => {
+    console.log(`player stands from ${seatNumber}`);
+
+    // Let the table know that someone has left their seat
+    io.to('table-1').emit('player_stands', seatNumber);
+  });
+
+  socket.on('player_folds', () => {
+    console.log(`${socket.id} folds`);
+  });
+
+  socket.on('player_checks', () => {
+    console.log(`${socket.id} checks`);
+  });
+
+  socket.on('player_calls', () => {
+    console.log(`${socket.id} calls`);
+  });
+
+  socket.on('player_raises', () => {
+    console.log(`${socket.id} raises`);
+  });
 });
 
 httpServer.listen(3000);
