@@ -3,6 +3,7 @@
 export interface ClientToServerEvents {
   hello_from_client: () => void;
   player_viewing: () => void;
+  player_ready: () => void;
   player_sits: (seatNumber: string) => void;
   player_stands: (seatNumber: string) => void;
   player_folds: () => void;

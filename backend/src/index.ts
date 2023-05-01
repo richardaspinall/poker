@@ -77,6 +77,10 @@ io.on('connection', (socket) => {
     io.to('table-1').emit('player_stands', seatNumber);
   });
 
+  socket.on('player_ready', () => {
+    console.log(`player ${socket.id} ready`);
+  });
+
   socket.on('player_folds', () => {
     console.log(`${socket.id} folds`);
   });

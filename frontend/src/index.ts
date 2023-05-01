@@ -40,6 +40,10 @@ document.getElementById('leave-table-button')?.addEventListener('click', functio
   socket.emit('player_stands', seatNumber);
 });
 
+document.getElementById('im-ready-button')?.addEventListener('click', function () {
+  socket.emit('player_ready');
+});
+
 document.getElementById('fold-action-button')?.addEventListener('click', function () {
   socket.emit('player_folds');
 });
