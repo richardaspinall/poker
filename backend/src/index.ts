@@ -52,6 +52,7 @@ tableManager.createTable('table-1', 2);
 
 import Player from './Player';
 import Game from './Game';
+import Dealer from './Dealer';
 
 // New client connected
 io.on('connection', (socket) => {
@@ -100,17 +101,8 @@ io.on('connection', (socket) => {
 
     // Start game if 2 or more people are ready to play
     // Should be on a pub sub / internal event emitter
-    // Should be passed to dealer to orchestrate the logic (dealer.startgame)
     if (table.isReadyToPlay()) {
-      // This is domain logic
-      const actingPlayer = table.getSeats()[0].getSeatNumber();
-
-      // This should be a factory method
-      const game = new Game(actingPlayer);
-
-      table.addGame(game);
-
-      game.startGame(io, table.getSeats());
+      Dealer.startGame(io, table);
     }
   });
 

@@ -6,6 +6,7 @@ export default class Table {
   private name: string;
   private seats: Seat[];
   private game: Game | undefined;
+  private dealerButton: string | undefined;
 
   public constructor(tableName: string, numSeats: number) {
     this.name = tableName;
@@ -40,8 +41,12 @@ export default class Table {
     }
   }
 
-  public addGame(game: Game) {
+  public setGame(game: Game) {
     this.game = game;
+  }
+
+  public setDealerButton(dealerButton: string) {
+    this.dealerButton = dealerButton;
   }
 
   public isReadyToPlay(): boolean {

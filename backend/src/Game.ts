@@ -1,36 +1,24 @@
 import Deck from './Deck';
-import Seat from './Seat';
 
 export default class Game {
-  private actingPlayer: string;
-  private deck: Deck | undefined;
+  private deck: Deck;
+  private actingPlayer: string | undefined;
   private pot = 0;
 
-  // Doesn't need to be initilized here
-  constructor(actingPlayer: string) {
-    this.actingPlayer = actingPlayer;
+  constructor(deck: Deck) {
+    this.deck = deck;
   }
 
-  public startGame(io: any, seats: Seat[]): void {
-    this.deck = new Deck();
-    const dealtInPlayers = [];
+  public setDeck(deck: Deck) {
+    this.deck = deck;
+  }
 
-    for (const seat of seats) {
-      const player = seat.getPlayer();
-      if (player) {
-        const cards = this.deck.draw(2);
+  public getDeck(): Deck | undefined {
+    return this.deck;
+  }
 
-        player.setHand(cards);
-        dealtInPlayers.push({ seat: seat.getSeatNumber() });
-      }
-    }
-
-    for (const seat of seats) {
-      const player = seat.getPlayer();
-      if (player) {
-        io.to(player.getId()).emit('game_start', player.getHand(), dealtInPlayers);
-      }
-    }
+  public setActingPlayer(actingPlayer: string) {
+    this.actingPlayer = actingPlayer;
   }
 
   public getActingPlayer(): string {
