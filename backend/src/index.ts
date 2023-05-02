@@ -45,6 +45,14 @@ io.use((socket, next) => {
   sessionMiddleware(socket.request as Request, {} as Response, next as NextFunction);
 });
 
+// Create a table
+import TableManager from './TableManager';
+const tableManager = new TableManager();
+tableManager.createTable('table-1', 2);
+
+import Player from './Player';
+import Game from './Game';
+
 // New client connected
 io.on('connection', (socket) => {
   // Send a hello to the client after receiving a hello from it
@@ -66,6 +74,11 @@ io.on('connection', (socket) => {
   socket.on('player_sits', (seatNumber) => {
     console.log(`player sits at ${seatNumber}`);
 
+    const player = new Player(socket.id, socket.id);
+    const table = tableManager.getTable('table-1');
+
+    table.addPlayer(seatNumber, player);
+
     // Let the table know that someone has seated
     io.to('table-1').emit('player_sits', seatNumber);
   });
@@ -77,8 +90,28 @@ io.on('connection', (socket) => {
     io.to('table-1').emit('player_stands', seatNumber);
   });
 
-  socket.on('player_ready', () => {
-    console.log(`player ${socket.id} ready`);
+  socket.on('player_ready', (tableName) => {
+    const table = tableManager.getTable(tableName);
+    const player = table.getPlayer(socket.id);
+
+    if (player) {
+      player.setReady(true);
+    }
+
+    // Start game if 2 or more people are ready to play
+    // Should be on a pub sub / internal event emitter
+    // Should be passed to dealer to orchestrate the logic (dealer.startgame)
+    if (table.isReadyToPlay()) {
+      // This is domain logic
+      const actingPlayer = table.getSeats()[0].getSeatNumber();
+
+      // This should be a factory method
+      const game = new Game(actingPlayer);
+
+      table.addGame(game);
+
+      game.startGame(io, table.getSeats());
+    }
   });
 
   socket.on('player_folds', () => {

@@ -1,26 +1,36 @@
 import Deck from './Deck';
-import Player from './Player';
+import Seat from './Seat';
 
-interface IGame {
-  startGame(): void;
-  getActingPlayer(): string;
-  startNextPlayerTurn(): void;
-  determineWinner(): string;
-  endGame(): void;
-}
-
-export default class Game implements IGame {
-  private players: Player[];
+export default class Game {
   private actingPlayer: string;
   private deck: Deck | undefined;
   private pot = 0;
 
-  constructor(players: Player[]) {
-    this.players = players;
-    this.actingPlayer = players[0].getId();
+  // Doesn't need to be initilized here
+  constructor(actingPlayer: string) {
+    this.actingPlayer = actingPlayer;
   }
-  public startGame(): void {
-    throw new Error('Method not implemented.');
+
+  public startGame(io: any, seats: Seat[]): void {
+    this.deck = new Deck();
+    const dealtInPlayers = [];
+
+    for (const seat of seats) {
+      const player = seat.getPlayer();
+      if (player) {
+        const cards = this.deck.draw(2);
+
+        player.setHand(cards);
+        dealtInPlayers.push({ seat: seat.getSeatNumber() });
+      }
+    }
+
+    for (const seat of seats) {
+      const player = seat.getPlayer();
+      if (player) {
+        io.to(player.getId()).emit('game_start', player.getHand(), dealtInPlayers);
+      }
+    }
   }
 
   public getActingPlayer(): string {

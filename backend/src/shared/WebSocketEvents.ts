@@ -3,13 +3,14 @@
 export interface ClientToServerEvents {
   hello_from_client: () => void;
   player_viewing: () => void;
-  player_ready: () => void;
+  player_ready: (tableName: string) => void;
   player_sits: (seatNumber: string) => void;
   player_stands: (seatNumber: string) => void;
   player_folds: () => void;
   player_checks: () => void;
   player_calls: () => void;
   player_raises: () => void;
+  game_start: (holeCards: string, dealtInPlayers: any) => void;
 }
 
 export interface ServerToClientEvents {
@@ -20,4 +21,5 @@ export interface ServerToClientEvents {
   player_checks: (seatNumber: string) => void;
   player_calls: (seatNumber: string) => void;
   player_raises: (seatNumber: string) => void;
+  game_start: (holeCards: string, dealtInPlayers: any) => void;
 }

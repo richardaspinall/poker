@@ -1,21 +1,20 @@
-interface iPlayer {
-  getName(): string;
-  getId(): string;
-  setHand(): void;
-  check(): void;
-  fold(): void;
-  call(): void;
-  raise(): void;
-}
+import { Card } from './Deck';
 
-export default class Player implements iPlayer {
+type Hand = {
+  card_one: string;
+  card_two: string;
+};
+
+export default class Player {
   private name: string;
   private id: string;
-  private hand = '';
+  private ready: boolean;
+  private hand: Card[] | undefined;
 
   constructor(name: string, id: string) {
     this.name = name;
     this.id = id;
+    this.ready = false;
   }
 
   public getName(): string {
@@ -23,11 +22,29 @@ export default class Player implements iPlayer {
   }
 
   public getId(): string {
-    throw new Error('Method not implemented.');
+    return this.id;
   }
 
-  public setHand(): void {
-    throw new Error('Method not implemented.');
+  public setReady(ready: boolean): void {
+    this.ready = ready;
+  }
+
+  public isReady(): boolean {
+    return this.ready;
+  }
+
+  public setHand(cards: Card[]): void {
+    this.hand = cards;
+  }
+
+  public getHand(): Hand {
+    if (this.hand) {
+      const hand = { card_one: this.hand[0].shortCode, card_two: this.hand[1].shortCode };
+
+      return hand;
+    }
+
+    throw new Error('no hand set');
   }
 
   public check(): void {

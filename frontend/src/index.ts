@@ -1,6 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 import { showAvatar } from './animation/showAvatar';
 import { removeAvatar } from './animation/removeAvatar';
+import { dealCards } from './animation/dealCards';
 import { ServerToClientEvents, ClientToServerEvents } from '../../backend/src/shared/WebSocketEvents';
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
@@ -41,7 +42,7 @@ document.getElementById('leave-table-button')?.addEventListener('click', functio
 });
 
 document.getElementById('im-ready-button')?.addEventListener('click', function () {
-  socket.emit('player_ready');
+  socket.emit('player_ready', 'table-1');
 });
 
 document.getElementById('fold-action-button')?.addEventListener('click', function () {
@@ -69,6 +70,13 @@ socket.on('player_sits', (seatNumber) => {
 
 socket.on('player_stands', (seatNumber) => {
   removeAvatar(seatNumber);
+});
+
+socket.on('game_start', (holeCards, dealtInPlayers) => {
+  console.log(seatNumber);
+  console.log(holeCards);
+  console.log(dealtInPlayers);
+  dealCards(seatNumber, holeCards, dealtInPlayers);
 });
 
 socket.on('player_folds', (seatNumber) => {
