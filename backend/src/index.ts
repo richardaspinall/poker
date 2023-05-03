@@ -45,14 +45,12 @@ io.use((socket, next) => {
   sessionMiddleware(socket.request as Request, {} as Response, next as NextFunction);
 });
 
-// Create a table
-import TableManager from './TableManager';
-const tableManager = new TableManager();
-tableManager.createTable('table-1', 2);
-
+import { tableManager } from './TableManager';
 import Player from './Player';
 import Game from './Game';
 import Dealer from './Dealer';
+
+import { playerReadyController } from './PlayerReadyController';
 
 // New client connected
 io.on('connection', (socket) => {
@@ -92,18 +90,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('player_ready', (tableName) => {
-    const table = tableManager.getTable(tableName);
-    const player = table.getPlayer(socket.id);
-
-    if (player) {
-      player.setReady(true);
-    }
-
-    // Start game if 2 or more people are ready to play
-    // Should be on a pub sub / internal event emitter
-    if (table.isReadyToPlay()) {
-      Dealer.startGame(io, table);
-    }
+    playerReadyController.executeImplementation(io, tableName, socket.id);
   });
 
   socket.on('player_folds', () => {

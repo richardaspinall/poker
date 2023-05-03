@@ -1,4 +1,5 @@
 import Table from './Table';
+
 export default class TableManager {
   private tables: Table[];
 
@@ -19,3 +20,8 @@ export default class TableManager {
     return table;
   }
 }
+
+const tableManager = new TableManager();
+tableManager.createTable('table-1', 2);
+
+export { tableManager };
