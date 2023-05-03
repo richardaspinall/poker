@@ -46,6 +46,8 @@ io.use((socket, next) => {
 });
 
 import { tableManager } from './TableManager';
+
+tableManager.setIoServer(io);
 import Player from './Player';
 import Game from './Game';
 import Dealer from './Dealer';
@@ -90,7 +92,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('player_ready', (tableName) => {
-    playerReadyController.executeImplementation(io, tableName, socket.id);
+    playerReadyController.executeImplementation(tableName, socket.id);
   });
 
   socket.on('player_folds', () => {

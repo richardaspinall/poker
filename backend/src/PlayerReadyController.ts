@@ -7,10 +7,10 @@ class PlayerReadyController {
     this.useCase = useCase;
   }
 
-  public executeImplementation(io: any, tableName: string, socketId: string) {
+  public executeImplementation(tableName: string, socketId: string) {
     const playerId = socketId;
 
-    this.useCase.execute(io, tableName, playerId);
+    this.useCase.execute(tableName, playerId);
   }
 }
 
