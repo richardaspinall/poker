@@ -46,13 +46,10 @@ io.use((socket, next) => {
 });
 
 import { tableManager } from './TableManager';
+import Player from './Player';
+import { playerReadyController } from './PlayerReadyController';
 
 tableManager.setIoServer(io);
-import Player from './Player';
-import Game from './Game';
-import Dealer from './Dealer';
-
-import { playerReadyController } from './PlayerReadyController';
 
 // New client connected
 io.on('connection', (socket) => {
@@ -81,7 +78,7 @@ io.on('connection', (socket) => {
     table.addPlayer(seatNumber, player);
 
     // Let the table know that someone has seated
-    io.to('table-1').emit('player_sits', seatNumber);
+    tableManager.emitToTable('table-1', 'player_sits', { seatNumber: seatNumber });
   });
 
   socket.on('player_stands', (seatNumber) => {

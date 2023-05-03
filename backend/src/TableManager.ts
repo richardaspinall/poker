@@ -28,11 +28,19 @@ export default class TableManager {
   }
 
   // Emits an event and arguments to a room
-  public emitToUser(socketId: string, event: string, args: any) {
+  public emitToUser(socketId: string, event: any, args: any) {
     const hand = args.hand;
     const dealtInPlayers = args.dealtInPlayers;
     if (this.io) {
-      this.io.to(socketId).emit('game_start', hand, dealtInPlayers);
+      this.io.to(socketId).emit(event, hand, dealtInPlayers);
+    }
+  }
+
+  public emitToTable(tableName: string, event: any, args: any) {
+    // Let the table know that someone has seated
+    const seatNumber = args.seatNumber;
+    if (this.io) {
+      this.io.to(tableName).emit(event, seatNumber);
     }
   }
 }

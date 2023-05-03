@@ -6,12 +6,14 @@ import { tableManager } from './TableManager';
 export default class Dealer {
   public static startGame(table: Table): void {
     const deck = new Deck();
-
     const game = new Game(deck);
 
     table.setGame(game);
 
-    // Deal cards to players
+    Dealer.dealCards(table, deck);
+  }
+
+  private static dealCards(table: Table, deck: Deck) {
     const dealtInPlayers = [];
     for (const seat of table.getSeats()) {
       const player = seat.getPlayer();
