@@ -89,6 +89,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('player_ready', (tableName) => {
+    // Set player ready flag on player
+    // Check if more than two players are ready
+    // I more than two players are ready, start game
+    // Deal cards to players
+    // Send cards down the socket
     playerReadyController.executeImplementation(tableName, socket.id);
   });
 

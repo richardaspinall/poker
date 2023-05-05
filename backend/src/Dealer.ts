@@ -25,7 +25,7 @@ export default class Dealer {
       }
     }
 
-    // Send to client
+    // Send to client (should this be done in the PlayerReadyUseCase / Service as this is application logic )
     for (const seat of table.getSeats()) {
       const player = seat.getPlayer();
       if (player) {
