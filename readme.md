@@ -13,9 +13,15 @@
 
 ---
 
+## Build FE
+
+`cd frontend && npm run build`
+
+---
+
 ## Requirements:
 
-* Nodejs 14
+- Nodejs 14
 
 ---
 
