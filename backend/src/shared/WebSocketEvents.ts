@@ -2,14 +2,14 @@
 
 export interface ClientToServerEvents {
   hello_from_client: () => void;
-  player_viewing: () => void;
-  player_ready: (tableName: string) => void;
-  player_sits: (seatNumber: string) => void;
-  player_stands: (seatNumber: string) => void;
-  player_folds: () => void;
-  player_checks: () => void;
-  player_calls: () => void;
-  player_raises: () => void;
+  onPlayerView: () => void;
+  onPlayerReady: (tableName: string) => void;
+  onPlayerSit: (seatNumber: string) => void;
+  onPlayerStand: (seatNumber: string) => void;
+  onPlayerFold: () => void;
+  onPlayerCheck: () => void;
+  onPlayerCall: () => void;
+  onPlayerRaise: () => void;
   game_start: (holeCards: string, dealtInPlayers: any) => void;
 }
 

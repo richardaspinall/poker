@@ -1,9 +1,9 @@
 import { io, Socket } from 'socket.io-client';
+import FetchFasade from './FetchFasade';
 import { showAvatar } from './animation/showAvatar';
 import { removeAvatar } from './animation/removeAvatar';
 import { dealCards } from './animation/dealCards';
 import { ServerToClientEvents, ClientToServerEvents } from '../../backend/src/shared/WebSocketEvents';
-
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
 
 // Send a hello to the server
@@ -32,33 +32,44 @@ document.querySelectorAll('.seat').forEach((seat) => {
     seatNumber = selectedSeatNumber;
 
     // Send event to server that the player has taken a seat
-    socket.emit('player_sits', selectedSeatNumber);
+    socket.emit('onPlayerSit', selectedSeatNumber);
   });
 });
 
 // Add button event listeners for each action
 document.getElementById('leave-table-button')?.addEventListener('click', function () {
-  socket.emit('player_stands', seatNumber);
+  socket.emit('onPlayerStand', seatNumber);
 });
 
-document.getElementById('im-ready-button')?.addEventListener('click', function () {
-  socket.emit('player_ready', 'table-1');
+async function playerReady(table: string, socketId: any): Promise<void> {
+  const payload = { table, socketId };
+  const result = await FetchFasade.post('/api/playerReady', payload);
+  if (result.ok) {
+    console.log(result.getPayload());
+  } else {
+    console.log('error', result.errorMessage);
+  }
+}
+
+document.getElementById('im-ready-button')?.addEventListener('click', () => {
+  // socket.emit('onPlayerReady', 'table-1');
+  playerReady('table-1', socket.id); // Don't await it here
 });
 
 document.getElementById('fold-action-button')?.addEventListener('click', function () {
-  socket.emit('player_folds');
+  socket.emit('onPlayerFold');
 });
 
 document.getElementById('check-action-button')?.addEventListener('click', function () {
-  socket.emit('player_checks');
+  socket.emit('onPlayerCheck');
 });
 
 document.getElementById('call-action-button')?.addEventListener('click', function () {
-  socket.emit('player_calls');
+  socket.emit('onPlayerCall');
 });
 
 document.getElementById('raise-action-button')?.addEventListener('click', function () {
-  socket.emit('player_raises');
+  socket.emit('onPlayerRaise');
 });
 
 //
@@ -96,4 +107,4 @@ socket.on('player_raises', (seatNumber) => {
 });
 
 // Send upon viewing the table (opening the page)
-socket.emit('player_viewing');
+socket.emit('onPlayerView');

@@ -4,6 +4,8 @@ import session, { Session } from 'express-session';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
+import { router } from './routes';
+
 import { ServerToClientEvents, ClientToServerEvents } from './shared/WebSocketEvents';
 
 declare module 'http' {
@@ -21,6 +23,8 @@ const httpServer = createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../../frontend/public')));
+
+app.use('/api', router);
 
 const sessionMiddleware = session({
   secret: 'changeit',
@@ -62,14 +66,14 @@ io.on('connection', (socket) => {
   //
   // Incoming events
   //
-  socket.on('player_viewing', () => {
+  socket.on('onPlayerView', () => {
     console.log(`player ${socket.id} is viewing table`);
 
     // Join the table to start receiving events
     socket.join('table-1');
   });
 
-  socket.on('player_sits', (seatNumber) => {
+  socket.on('onPlayerSit', (seatNumber) => {
     console.log(`player sits at ${seatNumber}`);
 
     const player = new Player(socket.id, socket.id);
@@ -81,35 +85,36 @@ io.on('connection', (socket) => {
     tableManager.emitToTable('table-1', 'player_sits', { seatNumber: seatNumber });
   });
 
-  socket.on('player_stands', (seatNumber) => {
+  socket.on('onPlayerStand', (seatNumber) => {
     console.log(`player stands from ${seatNumber}`);
 
     // Let the table know that someone has left their seat
     io.to('table-1').emit('player_stands', seatNumber);
   });
 
-  socket.on('player_ready', (tableName) => {
+  socket.on('onPlayerReady', (tableName) => {
     // Set player ready flag on player
     // Check if more than two players are ready
     // I more than two players are ready, start game
     // Deal cards to players
     // Send cards down the socket
+    console.log(socket.id);
     playerReadyController.executeImplementation(tableName, socket.id);
   });
 
-  socket.on('player_folds', () => {
+  socket.on('onPlayerFold', () => {
     console.log(`${socket.id} folds`);
   });
 
-  socket.on('player_checks', () => {
+  socket.on('onPlayerCheck', () => {
     console.log(`${socket.id} checks`);
   });
 
-  socket.on('player_calls', () => {
+  socket.on('onPlayerCall', () => {
     console.log(`${socket.id} calls`);
   });
 
-  socket.on('player_raises', () => {
+  socket.on('onPlayerRaise', () => {
     console.log(`${socket.id} raises`);
   });
 });

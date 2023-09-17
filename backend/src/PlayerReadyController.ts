@@ -26,7 +26,7 @@ class PlayerReadyController {
    */
   public executeImplementation(tableName: string, socketId: string) {
     const playerId = socketId;
-
+    console.log(socketId);
     this.useCase.execute(tableName, playerId);
   }
 }
