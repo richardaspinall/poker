@@ -51,7 +51,6 @@ io.use((socket, next) => {
 
 import { tableManager } from './TableManager';
 import Player from './Player';
-import { playerReadyController } from './PlayerReadyController';
 
 tableManager.setIoServer(io);
 
@@ -90,16 +89,6 @@ io.on('connection', (socket) => {
 
     // Let the table know that someone has left their seat
     io.to('table-1').emit('player_stands', seatNumber);
-  });
-
-  socket.on('onPlayerReady', (tableName) => {
-    // Set player ready flag on player
-    // Check if more than two players are ready
-    // I more than two players are ready, start game
-    // Deal cards to players
-    // Send cards down the socket
-    console.log(socket.id);
-    playerReadyController.executeImplementation(tableName, socket.id);
   });
 
   socket.on('onPlayerFold', () => {

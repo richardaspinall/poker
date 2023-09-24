@@ -3,7 +3,6 @@
 export interface ClientToServerEvents {
   hello_from_client: () => void;
   onPlayerView: () => void;
-  onPlayerReady: (tableName: string) => void;
   onPlayerSit: (seatNumber: string) => void;
   onPlayerStand: (seatNumber: string) => void;
   onPlayerFold: () => void;
