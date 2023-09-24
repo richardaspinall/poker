@@ -1,7 +1,7 @@
-import Result, { ResultSuccess, ResultError, Payload } from './Result';
+import Result, { ResultSuccess, ResultError } from './Result';
 
 class FetchFasade {
-  static async post(route: string, payload: any): Promise<Result> {
+  static async post(route: string, payload: any): Promise<Result<any>> {
     const headers: Headers = new Headers();
     headers.set('Content-Type', 'application/json');
     // We also need to set the `Accept` header to `application/json`
@@ -21,7 +21,7 @@ class FetchFasade {
       console.log(response.statusText);
       return new ResultError(response.statusText);
     }
-    const resJson = (await response.json()) as Payload;
+    const resJson = await response.json();
 
     return new ResultSuccess(resJson);
   }

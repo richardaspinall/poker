@@ -20,6 +20,19 @@ let seatNumber: string;
 //
 // Add a click event listener to each seat element to enable players to take a seat
 //
+
+async function playerSit(selectedSeatNumber: string, socketId: any): Promise<void> {
+  const payload = { selectedSeatNumber, socketId };
+
+  const result = await FetchFasade.post('/api/playerSit', payload);
+
+  if (result.ok) {
+    // console.log(result.getPayload());
+  } else {
+    console.log('error', result.errorMessage);
+  }
+}
+
 document.querySelectorAll('.seat').forEach((seat) => {
   seat.addEventListener('click', function (this: Element) {
     if (seatNumber) {
@@ -32,7 +45,8 @@ document.querySelectorAll('.seat').forEach((seat) => {
     seatNumber = selectedSeatNumber;
 
     // Send event to server that the player has taken a seat
-    socket.emit('onPlayerSit', selectedSeatNumber);
+    // socket.emit('onPlayerSit', selectedSeatNumber);
+    playerSit(selectedSeatNumber, socket.id);
   });
 });
 
