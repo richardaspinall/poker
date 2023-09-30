@@ -10,6 +10,7 @@ export interface ClientToServerEvents {
   onPlayerCall: () => void;
   onPlayerRaise: () => void;
   game_start: (holeCards: string, dealtInPlayers: any) => void;
+  create_something: (value, callback) => void;
 }
 
 export interface ServerToClientEvents {

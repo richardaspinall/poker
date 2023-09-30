@@ -4,7 +4,9 @@
   "description": "## Debugging",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cd backend && npm run start:dev",
+    "start:dev-server": "cd backend && npm run start:dev",
+    "start:dev-client": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run start:dev-server\" \"npm run start:dev-client\"",
     "install:all": "npm install && cd ./backend && npm install",
     "test": "cd backend && npm run test"
   },
@@ -27,5 +29,8 @@
     "@types/jest": "^29.2.2",
     "@types/socket.io": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.41.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.1"
   }
 }

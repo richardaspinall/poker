@@ -41,7 +41,7 @@ app.post('/login', (req, res) => {
 
 // Create the socket server with the event types for typing
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
-  /* options */
+  cors: { origin: '*' },
 });
 
 // Add session info to sockets
@@ -61,7 +61,6 @@ io.on('connection', (socket) => {
     console.log('hello from client');
     socket.emit('hello_from_server');
   });
-
   //
   // Incoming events
   //
