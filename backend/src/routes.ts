@@ -26,3 +26,8 @@ router.post('/playerCheck', GameController.playerCheck);
 router.post('/playerCall', GameController.playerCall);
 
 router.post('/playerRaise', GameController.playerRaise);
+
+router.post('/test', (req, res) => {
+  console.log('test');
+  res.send({ title: 'GeeksforGeeks' });
+});

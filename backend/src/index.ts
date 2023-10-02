@@ -2,6 +2,7 @@ import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import session, { Session } from 'express-session';
 import { createServer } from 'http';
+import cors from 'cors';
 import { Server } from 'socket.io';
 
 import { router } from './routes';
@@ -22,7 +23,7 @@ const httpServer = createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../../frontend/public')));
+app.use(cors());
 
 app.use('/api', router);
 
@@ -57,9 +58,16 @@ tableManager.setIoServer(io);
 // New client connected
 io.on('connection', (socket) => {
   // Send a hello to the client after receiving a hello from it
+
+  socket.emit('foo', 'bar');
+  socket.emit('foo', 'bazz');
   socket.on('hello_from_client', () => {
     console.log('hello from client');
     socket.emit('hello_from_server');
+  });
+
+  socket.on('create_something', () => {
+    console.log('create something');
   });
   //
   // Incoming events

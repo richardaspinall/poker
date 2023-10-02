@@ -22,4 +22,5 @@ export interface ServerToClientEvents {
   player_calls: (seatNumber: string) => void;
   player_raises: (seatNumber: string) => void;
   game_start: (holeCards: string, dealtInPlayers: any) => void;
+  foo: (value) => void;
 }
