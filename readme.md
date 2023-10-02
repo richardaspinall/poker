@@ -15,13 +15,13 @@
 
 ## Requirements:
 
-* Nodejs 14
+- Nodejs 14
 
 ---
 
 ## Start dev (not implemented / will see errors for now!):
 
-`npm run start:dev`
+`npm run dev` (starts the frontend and backend through concurrently)
 
 ---
 
@@ -32,6 +32,11 @@
 `npm run test --file={path_to_file}`
 
 Note: Commiting work will automatically run the unit tests through "Husky"
+
+## Refs:
+
+- The React frontend was set up with `npm create vite@latest`
+  - https://vitejs.dev/guide/
 
 ## TIP:
 
