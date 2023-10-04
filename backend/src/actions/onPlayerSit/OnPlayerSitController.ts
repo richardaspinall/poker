@@ -13,7 +13,7 @@ class OnPlayerSitController extends BaseController {
 
   public async executeImplementation(req: Request, res: Response): Promise<void | any> {
     const dto: OnPlayerSitDTO = req.body as OnPlayerSitDTO;
-    console.log(dto);
+    console.log('test:', dto);
     const result = this.useCase.execute(dto);
 
     if (result.ok === true) {

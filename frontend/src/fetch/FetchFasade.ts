@@ -16,7 +16,6 @@ class FetchFasade {
     });
 
     const response = await fetch(request);
-
     if (!response.ok) {
       console.log(response);
       console.log(response.statusText);

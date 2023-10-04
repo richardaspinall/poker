@@ -6,18 +6,31 @@ import './index.css';
 export function Table() {
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [seatNumber, setSeatNumber] = useState('1');
 
   const playerReady = useCallback(async () => {
-    const result = await FetchFasade.post('/api/test', {});
-
-    socket.emit('create_something', (err, response) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(response);
-      }
-    });
+    const payload = { table: 'table-1', socketId: socket.id };
+    const result = await FetchFasade.post('/api/playerReady', payload);
+    if (result.ok) {
+      console.log(result.getPayload());
+    } else {
+      console.log('error', result.errorMessage);
+    }
   }, []);
+
+  const playerSit = useCallback(async (event) => {
+    const payload = { selectedSeatNumber: event.currentTarget.id, socketId: socket.id };
+    const result = await FetchFasade.post('/api/playerSit', payload);
+
+    if (result.ok) {
+      // console.log(result.getPayload());
+    } else {
+      console.log('error', result.errorMessage);
+    }
+
+    setSeatNumber(event.currentTarget.id);
+  }, []);
+
   return (
     <>
       <div id="table">
@@ -33,11 +46,11 @@ export function Table() {
           <div id="river-area"></div>
         </div>
 
-        <div className="seat" id="seat-1" data-chip-count="0">
+        <div className="seat" id="seat-1" data-chip-count="0" onClick={playerSit}>
           Empty
           <div id="dealer-indicator">B</div>
         </div>
-        <div className="seat" id="seat-2" data-chip-count="0">
+        <div className="seat" id="seat-2" data-chip-count="0" onClick={playerSit}>
           Empty
         </div>
       </div>

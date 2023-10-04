@@ -6,6 +6,7 @@ import { MyForm } from './components/MyForm';
 import { Events } from './components/Events';
 import { Table } from './components/Table/Table';
 
+// https://socket.io/how-to/use-with-react
 export default function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
@@ -13,6 +14,7 @@ export default function App() {
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
+      socket.emit('onPlayerView');
     }
 
     function onDisconnect() {
