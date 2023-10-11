@@ -31,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^5.41.0"
   },
   "dependencies": {
-    "concurrently": "^8.2.1"
+    "concurrently": "^8.2.1",
+    "husky": "^8.0.3"
   }
 }
