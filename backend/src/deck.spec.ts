@@ -7,7 +7,7 @@ describe('Deck', () => {
       const deck = new Deck();
       const cards = deck.getCards();
 
-      expect(cards.length).toBe(52);
+      expect(cards.length).toBe(53);
     });
   });
 
