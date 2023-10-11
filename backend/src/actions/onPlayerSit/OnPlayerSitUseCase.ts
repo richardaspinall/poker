@@ -24,7 +24,7 @@ export default class OnPlayerSitUseCase {
     if (!table) {
       return new ResultError("table doesn't exist");
     }
-
+    console.log('OKATER', socketId);
     table.addPlayer(seatNumber, player);
 
     // Let the table know that someone has seated

@@ -70,6 +70,7 @@ export function createCardsInSuit(suit: Suit): Card[] {
   const result: Card[] = [];
   const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
+  // `suit[0] is the first letter of the suit
   for (const rank of ranks) {
     const shortCode = `${rank}${suit[0]}`;
     result.push({ suit: suit, rank: rank, shortCode });
